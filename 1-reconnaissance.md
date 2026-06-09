@@ -1477,9 +1477,39 @@ Ping Sweep Tools
 •	SolarWinds Engineer Toolset (Ping Sweep): Scans a range of IP addresses to find which are active or free, and can perform reverse DNS lookups.
 
 
+# OS and Service Detection
 
 
-
+1. Detect Operating System
+nmap 10.10.10.10 -O
+•	Nmap tries to identify the OS by analyzing how the target responds to network probes.
+•	For best results, the target should have at least one open and one closed port.
+•	Add -v for more verbose output:
+nmap -O -v 10.10.10.10
+•	If scanning many hosts, use --osscan-limit to skip OS detection for systems that don't meet the required conditions:
+nmap -O --osscan-limit 10.10.10.10
+2. Submit TCP/IP Fingerprints
+•	If Nmap cannot identify the OS, it will show a fingerprint.
+•	You can submit this fingerprint to Nmap for analysis at: [www.nmap.org/submit/](https://nmap.org/submit/)
+nmap -O 10.10.10.10
+3. Guess Unknown Operating System
+nmap -O --osscan-guess 10.10.10.10
+•	Nmap will try to guess the OS and show a list of likely matches.
+________________________________________
+🔧 Service Version Detection
+4. Detect Service Versions
+nmap -sV 10.10.10.10
+•	Shows software and version info for open ports.
+•	Some ports are skipped by default (e.g., 9100–9107). To include all ports:
+nmap -sV --allports 10.10.10.10
+5. Troubleshoot Version Scanning
+nmap -sV --version-trace 10.10.10.10
+•	Helps troubleshoot version detection by showing detailed trace output.
+________________________________________
+📡 RPC Scan
+6. Scan for Remote Procedure Call Services
+nmap -sR 10.10.10.10
+•	Scans the system for RPC (Remote Procedure Call) services.
 
 
 
