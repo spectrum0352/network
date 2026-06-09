@@ -1269,8 +1269,212 @@ Send Bad Checksums 	nmap --badsum [target]
 <img width="550" height="322" alt="image" src="https://github.com/user-attachments/assets/7aa7a3dd-d82e-4254-86ba-788add017b5d" />
 
 
+# NMAP
+
+NMAP
+
+Nmap for Network Reconnaissance
+Nmap is a versatile tool used by both network administrators and attackers.
+•	Administrators: Use it for network inventory, service upgrade scheduling, and uptime monitoring.
+•	Attackers: Use it to discover live hosts, services (application and version), firewall/packet filter types, and operating system information.
+TCP Scanning Techniques
+Nmap offers various TCP scanning methods:
+•	Open TCP Scans: 
+o	TCP Connect Scan (-sT): Completes the full three-way handshake, easily detectable, doesn't require root privileges.
+•	Stealth TCP Scans: 
+o	SYN Scan (Half-open Scan) (-sS): Sends a SYN packet, responds to SYN/ACK with RST, less detectable.
+o	Inverse TCP Flag Scans (-sF, -sN, -sX): 
+	FIN Scan (-sF): Sends FIN packets.
+	NULL Scan (-sN): Sends packets with no flags set.
+	Xmas Scan (-sX): Sends packets with FIN, URG, and PUSH flags set. (These scans rely on RFC 793, and may not work on modern windows systems).
+o	ACK Flag Probe Scan (-sA): Sends ACK packets, analyzes RST responses for TTL and WINDOW values to determine port status and firewall filtering.
+•	Spoofed TCP Scans: 
+o	IDLE/IP ID Header Scan (-sI): Uses a "zombie" host to indirectly scan a target, relying on IP ID sequence numbers.
+Key Nmap Concepts and Flags
+•	Three-way handshake: SYN, SYN/ACK, ACK.
+•	RST packet: Used to reset a connection.
+•	IP ID (IPID): A fragment identification number that increments with each sent IP packet.
+•	Nmap Flags: 
+o	-sT: TCP Connect scan.
+o	-sS: SYN (Stealth) scan.
+o	-sF, -sN, -sX: Inverse TCP flag scans (FIN, NULL, Xmas).
+o	-sA: ACK flag probe scan.
+o	-sI: IDLE/IP ID header scan.
+o	-sU: UDP scan.
+o	-sn or -sP: ICMP echo (ping) scan.
+o	-sL: List scan (DNS resolution only).
+o	-O: OS detection.
+o	-Pn: Port scan only (no host discovery).
+UDP Scanning (-sU)
+•	UDP scans don't use the three-way handshake.
+•	Open ports don't respond.
+•	Closed ports respond with ICMP port unreachable messages.
+ICMP Scanning (-sn/-sP) and List Scan (-sL)
+•	ICMP echo scans (ping) determine active hosts.
+•	List scans perform DNS resolution without pinging.
+Port Scanning Countermeasures
+•	Configure firewalls and intrusion detection systems (IDS) to detect and block scans.
+•	Regularly scan your own network to test defenses.
+•	Ensure routers and firewalls are updated.
+•	Use custom firewall rules to block unwanted ports.
+•	Filter ICMP messages.
+•	Test anti-scanning and anti-spoofing rules.
 
 
+
+Nmap Port States 
+•	Open: A port that actively responds to an incoming connection. means that an application on the target machine is listening for connections/packets on that port
+•	Closed: A port on a target that actively responds to a probe but does not have any service running on the port. Closed ports are commonly found on systems where no firewall is in place to filter incoming traffic. means ports have no application listening on them, though they could open at any time.
+•	Filtered: Filtered ports are ports that are typically protected by a firewall of some sort that prevents Nmap from determining whether or not the port is open or closed. means that a firewall, filter, or other network obstacle is blocking the port so that Nmap cannot tell whether it is open or closed.
+•	Unfiltered: An unfiltered port is a port that Nmap can access but is unable to determine whether it is open or closed. Ports are classified as unfiltered when they are responsive to Nmap’s probes, but Nmap cannot determine whether they are open/ closed
+•	Open | filtered: An open | filtered port is a port which Nmap believes to be open or filtered but cannot determine which exact state the port is actually in.  This indicates that the port was filtered or open but Nmap couldn’t establish the state
+•	Closed | filtered: A closed | filtered port is a port that Nmap believes to be closed or filtered but cannot determine which respective state the port is actually in. This indicates that the port was filtered or closed but Nmap couldn’t establish the state.
+
+Nmap Port States 
+
+Demystifying Nmap Port States: Open or Closed, maybe?
+
+Nmap, a popular port scanner, helps identify open ports on a target device, revealing potential vulnerabilities. But Nmap doesn't always provide a definitive answer. Here is a breakdown of the different port states Nmap reports:
+•	Open: This is the good news for attackers (and the bad news for defenders). An open port means a service is actively listening for incoming connections, indicating potential attack surfaces.
+•	Closed: This might seem like a good thing, but it's not always definitive. A closed port simply means no service is actively listening now. However, it could be opened in the future.
+•	Filtered: This is where things get tricky. A filtered port suggests a firewall or other security measure is blocking Nmap's scan, making it impossible to determine if the port is truly open or closed.
+•	Unfiltered: This is another ambiguous state. Nmap can access the port, but it can't tell if it's open or closed. This could be due to the target device's specific configuration.
+•	Open filtered: This combines the uncertainty of open and filtered. Nmap suspects the port might be open, but the firewall is making it difficult to be sure.
+•	Closed filtered: Like open filtered, Nmap leans towards closed but can't be certain due to filtering.
+
+In Summary:
+While Nmap provides valuable insights, these port states highlight the limitations of automated scanning. Firewalls and other security measures can make it challenging to get a complete picture of a target device's vulnerabilities.
+For a more comprehensive understanding, consider combining Nmap scans with other techniques like vulnerability scanners and manual analysis.
+
+Recon with NMAP
+nmap 172.16.1.10           
+Scan via specific network interface (eth0/wlan0): >nmap -e eth0 172.16.1.10
+Display host networking configuration, general network, and routing information for the local system: >nmap - -iflist
+Troubleshoot connectivity issues (Trace packets) by displaying summary of sent and received packets: >nmap - -packet-trace 172.16.1.10
+Troubleshoot connectivity issues on specific network interface (et0/wlan0): >nmap -e eth0 172.16.1.10
+nmap 172.16.1.10           
+Scan via specific network interface (eth0/wlan0): >nmap -e eth0 172.16.1.10
+
+NMAP
+Nmap is a powerful tool used to explore and check networks. Both network administrators and attackers use it, but for different reasons:
+•	Network Administrators: Use Nmap to see what devices are on their network, check software versions, plan updates, and monitor uptime.
+•	Attackers: Use Nmap to find live devices, what services they run, what firewall or filters are in place, and which operating systems they use.
+
+Nmap helps discover important information about Azure networks before deeper testing.
+
+TCP Scanning Methods in Nmap
+Nmap has several ways to scan TCP ports to find out if they are open or closed:
+1.	Open TCP Scans (Full connection):
+o	TCP Connect Scan (-sT):
+This scan completes the full connection (three-way handshake: SYN, SYN/ACK, ACK).
+	Easy to detect by security systems.
+	Does not need special permissions (no root access needed).
+2.	Stealth TCP Scans (Less detectable):
+o	SYN Scan (-sS):
+Sends a SYN packet and waits for SYN/ACK, but then resets the connection before completing it.
+	Harder to detect than full connect scan.
+o	Inverse TCP Flag Scans:
+These scans send packets with unusual flags set and observe the response to guess if ports are open or closed.
+	FIN Scan (-sF): Sends FIN packets.
+	NULL Scan (-sN): Sends packets with no flags set.
+	Xmas Scan (-sX): Sends packets with FIN, URG, and PUSH flags set.
+Note: These may not work well on modern Windows systems.
+o	ACK Flag Probe Scan (-sA):
+Sends ACK packets and analyses the reset (RST) response to check firewall filtering and port status.
+3.	Spoofed TCP Scans:
+o	IDLE/IP ID Header Scan (-sI):
+Uses a "zombie" host to scan the target indirectly by watching how the zombie’s IP ID number changes. This method is stealthy and hard to detect.
+
+Important Concepts & Nmap Flags
+•	Three-way handshake: The normal TCP connection steps — SYN, SYN/ACK, ACK.
+•	RST packet: A reset signal to close or refuse a connection.
+•	IP ID (IPID): A number that identifies and tracks packets sent by a host.
+
+
+UDP Scanning (-sU)
+•	UDP scans are different because UDP doesn't have a handshake like TCP.
+•	Open UDP ports usually do not reply.
+•	Closed UDP ports send back ICMP "port unreachable" messages.
+
+ICMP and List Scans
+•	ICMP Ping Scan (-sn or -sP):
+Sends ping requests to see which hosts are alive.
+•	List Scan (-sL):
+Lists targets by resolving DNS names but does not send any packets to the host.
+
+Port Scanning Countermeasures
+•	Configure firewalls and intrusion detection systems (IDS) to detect and block scans.
+•	Regularly scan your own network to test defenses.
+•	Ensure routers and firewalls are updated.
+•	Use custom firewall rules to block unwanted ports.
+•	Filter ICMP messages.
+•	Test anti-scanning and anti-spoofing rules.
+
+Nmap Port States 
+Demystifying Nmap Port States: Open or Closed, maybe?
+Nmap, a popular port scanner, helps identify open ports on a target device, revealing potential vulnerabilities. But Nmap doesn't always provide a definitive answer. Here is a breakdown of the different port states Nmap reports:
+•	Open: This is the good news for attackers (and the bad news for defenders). An open port means a service is actively listening for incoming connections, indicating potential attack surfaces.
+•	Closed: This might seem like a good thing, but it's not always definitive. A closed port simply means no service is actively listening now. However, it could be opened in the future.
+•	Filtered: This is where things get tricky. A filtered port suggests a firewall or other security measure is blocking Nmap's scan, making it impossible to determine if the port is truly open or closed.
+•	Unfiltered: This is another ambiguous state. Nmap can access the port, but it can't tell if it's open or closed. This could be due to the target device's specific configuration.
+•	Open filtered: This combines the uncertainty of open and filtered. Nmap suspects the port might be open, but the firewall is making it difficult to be sure.
+•	Closed filtered: Like open filtered, Nmap leans towards closed but can't be certain due to filtering.
+
+In Summary:
+While Nmap provides valuable insights, these port states highlight the limitations of automated scanning. Firewalls and other security measures can make it challenging to get a complete picture of a target device's vulnerabilities.
+For a more comprehensive understanding, consider combining Nmap scans with other techniques like vulnerability scanners and manual analysis.
+
+
+
+Nmap Advance Port Scan
+•	Fragment Scan
+•	Data Length Scan
+•	TTL Scan
+•	Source Port Scan
+•	Decoy Scan
+
+# Techniques Used for Network Reconnaissance:
+
+•	DNS Enumeration: Extracting information by querying DNS servers for zone transfers (if allowed).
+•	SNMP Enumeration: Extracting usernames and other details using the Simple Network Management Protocol.
+•	SMTP Enumeration: Techniques to gather information about email servers, potentially revealing usernames.
+•	Port Scanning: Tools like nmap can scan a target network to identify open ports and running services.
+•	Social Engineering: Tricking users into revealing information about the network.
+
+
+# Ping  
+
+Ping  
+
+What is Ping?
+•	Ping is a tool used to check which devices (hosts) are active on a network.
+•	It works by sending a special message called an ICMP Echo Request to many IP addresses.
+•	If a device is active, it responds with an ICMP Echo Reply.
+
+How Attackers Use Ping in Azure:
+•	Attackers first figure out the network size using tools called Subnet Mask Calculators. This tells them how many devices could be on the network.
+•	Then, they perform a "ping sweep" — sending ping requests to all IP addresses in the subnet to find out which devices are live.
+
+
+Common ICMP Message Types
+
+ICMP Type	Name	Description
+0	Echo Reply	Response to a ping request
+3	Destination Unreachable	Host or network can't be reached
+ 	 	- 0: Network Unreachable
+ 	 	- 1: Host Unreachable
+ 	 	- 2: Protocol Unreachable
+ 	 	- 3: Port Unreachable
+ 	 	- 9: Network blocked by admin rules
+ 	 	- 10: Host blocked by admin rules
+ 	 	- 13: Communication blocked administratively
+8	Echo	Ping request message
+11	Time Exceeded	Packet took too long or couldn’t be reassembled
+
+
+Ping Sweep Tools
+•	Angry IP Scanner: Scans IP addresses by sending pings to see which are alive. It can also find hostnames, MAC addresses, and open ports.
+•	SolarWinds Engineer Toolset (Ping Sweep): Scans a range of IP addresses to find which are active or free, and can perform reverse DNS lookups.
 
 
 
