@@ -627,3 +627,14 @@ Thread count should remain conservative to avoid triggering rate-limiting or def
 * Rate-limiting, WAF controls, and Defender for Cloud protections may impact automated scanning activity.
 
 All reconnaissance and testing activities must be conducted within the scope of explicit authorization and applicable rules of engagement.
+
+## HTTP
+
+## Design Flaws
+
+- **Lack of state management:** HTTP is stateless, requiring mechanisms like cookies or server-side sessions to maintain state.
+- **Potential for man-in-the-middle attacks:** Unencrypted HTTP traffic can be intercepted and tampered with.
+- **Limited authentication and authorization:** Basic mechanisms like HTTP Basic Auth are often insufficient for robust security.
+- **Lack of Built-in Authentication:** HTTP does not inherently provide authentication mechanisms, making it vulnerable to unauthorized access.
+- **Plaintext Transmission:** Data is transmitted in plaintext, making it susceptible to eavesdropping.
+- **Session Hijacking:** Sessions can be hijacked by attackers, allowing them to impersonate legitimate users.
