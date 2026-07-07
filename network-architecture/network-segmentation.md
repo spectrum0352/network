@@ -220,3 +220,41 @@ Here are some of the benefits of network segmentation:
 
 - Network segmentation improves network visibility and management, we can <span class="mark">easily monitor traffic and identify potential problems</span>. They can also more easily deploy and manage security controls on a per-segment.
 
+## Network Segmentation
+
+**Azure Network Segmentation** involves dividing a virtual network into smaller isolated segments, known as subnets, to enhance security and control traffic flow.
+
+Key Components
+
+- **Virtual Networks (VNETs):** Logical isolation of network resources.
+- **Subnets:** Divisions within a VNET for further segmentation.
+- **Network Security Groups (NSGs):** Act as firewalls, controlling inbound and outbound traffic.
+- **Application Security Groups (ASGs):** Group virtual machines based on application logic for simplified security policy management.
+
+Core Concepts
+
+- **Isolation:** Segmenting high-value resources into isolated VNETs and subnets.
+- **Access control:** Using NSGs to define granular network security policies.
+- **Security groups:** Simplifying security management with ASGs.
+- **Default denies:** Implementing a "deny by default" principle for enhanced security.
+
+In essence, Azure Network Segmentation provides a robust framework for protecting resources and controlling network traffic by creating isolated segments and implementing granular security policies.
+
+## Azure Policies for network segmentation
+
+- All Internet traffic should be routed via your deployed Azure Firewall
+- Adaptive network hardening recommendations should be applied on internet facing virtual machines
+- All network ports should be restricted on network security groups associated to your virtual machine
+- Internet-facing virtual machines should be protected with Network Security Groups
+- IP Forwarding on your virtual machine should be disabled
+- Management ports of virtual machines should be protected with just-in-time network access control
+- Management ports should be closed on your virtual machines
+- Non-internet-facing virtual machines should be protected with network security groups
+- Subnets should be associated with a Network Security Group
+
+VNet concepts and best practices: <https://docs.microsoft.com/azure/virtual-network/concepts-and-best-practices>
+Subnet: <https://docs.microsoft.com/azure/virtual-network/virtual-network-manage-subnet>
+NSG: <https://docs.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic>
+ASG: <https://docs.microsoft.com/azure/virtual-network/network-security-groups-overview#application-security-groups>
+
+Security architecture: <https://docs.microsoft.com/azure/cloud-adoption-framework/organize/cloud-security-architecture>
