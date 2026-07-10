@@ -23,10 +23,10 @@ Firewalls play a crucial role in safeguarding network security by:
 
 - **Protecting against attacks:** Firewalls can help prevent a variety of attacks, including:
 
- - Denial-of-service (DoS) attacks
- - Malware infections  
- - Unauthorized access attempts  
- - Data breaches  
+- Denial-of-service (DoS) attacks
+- Malware infections
+- Unauthorized access attempts
+- Data breaches
 
 - **Enforcing security policies:** They can be configured to implement specific security policies, such as restricting access to certain websites or services.  
 
@@ -74,7 +74,7 @@ Firewalls play a crucial role in safeguarding network security by:
 
 - **Virtual network requirement:** Requires a dedicated subnet named "AzureFirewallSubnet."
 
-- To route all traffic via Azure Firewall, Create routes in route table
+- To route all traffic via Azure Firewall, create routes in route table
 
 Benefits
 
@@ -398,8 +398,7 @@ Importance:
 <td>Restrict DNS zone transfers to authorized sources. Protects DNS information.</td>
 </tr>
 <tr>
-<td colspan="2">VII. Firewall Configuration and Management</td>
-<td></td>
+<td colspan="3">VII. Firewall Configuration and Management</td>
 </tr>
 <tr>
 <td></td>
@@ -713,7 +712,7 @@ By following this detailed architecture, you can design and implement a robust A
 
 # Deployment
 
-<https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal>
+[Azure Firewall Deployment Tutorial](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal)
 
 ## Checklist
 
@@ -2543,7 +2542,7 @@ A firewall is a network security device that acts as a barrier between trusted a
 
 - **Virtual network requirement:** Requires a dedicated subnet named "AzureFirewallSubnet."
 
-- To route all traffic via Azure Firewall, Create routes in route table
+- To route all traffic via Azure Firewall, create routes in route table
 
 Benefits
 
@@ -2867,8 +2866,7 @@ Importance:
 <td>Restrict DNS zone transfers to authorized sources. Protects DNS information.</td>
 </tr>
 <tr>
-<td colspan="2">VII. Firewall Configuration and Management</td>
-<td></td>
+<td colspan="3">VII. Firewall Configuration and Management</td>
 </tr>
 <tr>
 <td></td>
@@ -3182,7 +3180,7 @@ By following this detailed architecture, you can design and implement a robust A
 
 # Deployment
 
-<https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal>
+[Azure Firewall Deployment Tutorial](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal)
 
 ## Checklist
 
